@@ -28,7 +28,8 @@ public class EDIT extends HttpServlet {
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
 	    
-	    
+//	 works fine   
+	 
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //			update Edit order query in database
 			
@@ -37,7 +38,7 @@ public class EDIT extends HttpServlet {
 			int amt = 0;
 			String notes="";
 
-			
+			System.out.println("inside");
 			
 			Connection connection = null;
 			String query="";
@@ -48,9 +49,9 @@ public class EDIT extends HttpServlet {
 				
 				
 				query="UPDATE `order_details` \r\n" + 
-						"SET `Order_Amount` = "+amt+" , `Notes` =" +notes+" WHERE `Order_ID` = "+id+" ;";
+						"SET `Order_Amount` = "+amt+" , `Notes`"+"="+" \'"+notes+"\' WHERE `Order_ID` = "+id+" ;";
 				
-				
+				System.out.println(query);
 				connection = DataClass.initializeDatabase();
 				DataClass.runQuery(connection, query);
 				
@@ -85,7 +86,7 @@ public class EDIT extends HttpServlet {
 		 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-
+			doGet(request, response);
 		}
 		
 

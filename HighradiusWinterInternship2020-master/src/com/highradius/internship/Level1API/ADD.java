@@ -72,8 +72,6 @@ public class ADD  extends HttpServlet{
 		String query="";
 		try {
 			
-	
-			
 			orderID = Integer.parseInt(request.getParameter("orderID"));
 			customerID = Integer.parseInt(request.getParameter("customerID"));
 			orderAmt = Integer.parseInt(request.getParameter("orderAmt"));
@@ -85,7 +83,7 @@ public class ADD  extends HttpServlet{
 			notes = request.getParameter("notes");
 			
 //			change it to correct time format
-			orderDate = "2020-09-20 00:00:00";
+//			orderDate = "2020-09-20 00:00:00";
 			
 
 			
