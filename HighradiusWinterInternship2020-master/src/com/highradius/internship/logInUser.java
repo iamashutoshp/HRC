@@ -19,6 +19,8 @@ import com.mysql.cj.protocol.Resultset;
 
 @WebServlet("/logus")
 public class logInUser extends HttpServlet {
+	
+	
 	private static final long serialVersionUID = 1L;
        
     /**
