@@ -22,9 +22,14 @@ import com.highradius.internship.data.OrderDetails;
 public class SearchData extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public SearchData() throws ClassNotFoundException {
     	super();
     }
+
+	
     
 //    try to implement fast searching
     
@@ -84,8 +89,15 @@ public class SearchData extends HttpServlet{
 			sz=data.size()/10;
 		else
 			sz=data.size()/10 + 1;
-//		got row data of requested page
+		
+		
+		
+		
+		
+		
 		ArrayList<OrderDetails> rowData = new ArrayList<>();
+		
+		
 		for(int k=0;k<10 && (k+10*pageNo)<data.size();k++)
 			rowData.add(data.get(k+10*pageNo));
 		
@@ -98,11 +110,21 @@ public class SearchData extends HttpServlet{
 		
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
+		 
+		 
+		 
 		 PrintWriter out = response.getWriter();
+		 
+		 
 		 response.setContentType("application/json");
 		 response.setCharacterEncoding("UTF-8");
+		 
+		 
 		 out.print(send);
 		 out.flush();
+
+				
+		
 	}
 //
 		
