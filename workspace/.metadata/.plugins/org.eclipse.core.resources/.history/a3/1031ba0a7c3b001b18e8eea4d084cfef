@@ -45,12 +45,30 @@ public class Pagination extends HttpServlet{
 		
 
 		ArrayList<OrderDetails> data = new ArrayList<>();
+		
+		
+		
+			
+
+		
+		
+	    
 		Connection connection = null;
 		String query="";
+		
+		
 		try {
+			
+
+			
+
+			
 			connection = DataClass.initializeDatabase();
 			query = "SELECT * FROM order_details ;"  ;
+	
+	
 			ResultSet resultset = DataClass.getDBResultSet(connection, query);
+			
 			int i = 0;
 			while(resultset.next()) {
 				OrderDetails details = new OrderDetails();
@@ -85,7 +103,6 @@ public class Pagination extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		int sz=0;
 		if(data.size()%10 == 0)

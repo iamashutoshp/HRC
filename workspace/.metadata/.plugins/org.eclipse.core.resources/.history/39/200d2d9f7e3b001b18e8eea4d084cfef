@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,43 +15,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.highradius.internship.DataClass;
-import com.highradius.internship.logInUser;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import com.highradius.internship.data.OrderDetails;
 
-import com.highradius.internship.data.*;
+@WebServlet("/search")
 
-
-@WebServlet("/paging")
-
-
-
-// implement client side paging
-public class Pagination extends HttpServlet{
+public class SearchData extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Pagination() throws ClassNotFoundException {
+    public SearchData() throws ClassNotFoundException {
     	super();
     }
 
 	
     
-//    try to implement paging
+//    try to implement fast searching
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
 		ArrayList<OrderDetails> data = new ArrayList<>();
 		Connection connection = null;
 		String query="";
+		
+		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
+		int search = Integer.parseInt(request.getParameter("s")); 
 		try {
 			connection = DataClass.initializeDatabase();
 			query = "SELECT * FROM order_details ;"  ;
+			
+			query = "SELECT * FROM order_details WHERE Order_ID LIKE \'"+search+"%\' ;" ;
 			ResultSet resultset = DataClass.getDBResultSet(connection, query);
 			int i = 0;
-			while(resultset.next()) {
+			if (resultset != null) {
+			do {
 				OrderDetails details = new OrderDetails();
 				details.setId(i++);
 				
@@ -70,13 +66,14 @@ public class Pagination extends HttpServlet{
 				
 				data.add(details);
 				
-			}
+			}while(resultset.next());
 			DataClass.closeResultSet(resultset);
 			 DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
 			
+			}
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -93,7 +90,7 @@ public class Pagination extends HttpServlet{
 		else
 			sz=data.size()/10 + 1;
 		
-		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
+		
 		
 		
 		
@@ -104,7 +101,12 @@ public class Pagination extends HttpServlet{
 		for(int k=0;k<10 && (k+10*pageNo)<data.size();k++)
 			rowData.add(data.get(k+10*pageNo));
 		
-		Data res = new Data(rowData, pageNo+1, sz);
+		Data res ;
+		System.out.println(data);
+		if(data.isEmpty())
+			res = new Data(rowData, 0, 0);
+		else
+			res = new Data(rowData, pageNo+1, sz);
 		
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
@@ -120,6 +122,9 @@ public class Pagination extends HttpServlet{
 		 
 		 out.print(send);
 		 out.flush();
+
+				
+		
 	}
 //
 		
@@ -139,14 +144,4 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 	
 
-}
-
-class Data{
-	ArrayList<OrderDetails> data;
-	int pageNo, totalSize;
-	Data(ArrayList<OrderDetails> d, int pno, int size){
-		data=d;
-		pageNo = pno;
-		totalSize =size;
-	}
 }
