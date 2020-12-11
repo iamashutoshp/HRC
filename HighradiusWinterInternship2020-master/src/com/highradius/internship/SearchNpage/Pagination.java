@@ -89,7 +89,8 @@ public class Pagination extends HttpServlet{
 				data.add(details);
 				
 			}
-			 
+			DataClass.closeResultSet(resultset);
+			 DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
