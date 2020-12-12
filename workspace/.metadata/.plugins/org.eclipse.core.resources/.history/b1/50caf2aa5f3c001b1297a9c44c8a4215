@@ -63,7 +63,7 @@ public class ADD  extends HttpServlet{
 		System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
 		
 		Gson gson = new Gson();
-		 String data = gson.toJson("hgjhhjk");
+		 String data = gson.toJson(request);
 		 
 		 
 		 

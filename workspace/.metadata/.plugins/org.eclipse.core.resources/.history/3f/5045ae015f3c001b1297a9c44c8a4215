@@ -58,24 +58,8 @@ public class ADD  extends HttpServlet{
 		
 		
 //		String data=request.getParameter("send");
-		
-		System.out.println(request);
+		System.out.println(request.getAttribute("send"));
 		System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
-		
-		Gson gson = new Gson();
-		 String data = gson.toJson("hgjhhjk");
-		 
-		 
-		 
-		 PrintWriter out = response.getWriter();
-		 
-		 
-		 response.setContentType("application/json");
-		 response.setCharacterEncoding("UTF-8");
-		 
-		 
-		 out.print(data);
-		 out.flush();
 		
 //		-------------------------------------------
 		

@@ -106,8 +106,6 @@ public class Pagination extends HttpServlet{
 		
 		Data res = new Data(rowData, pageNo+1, sz);
 		
-		
-		
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
 		 
