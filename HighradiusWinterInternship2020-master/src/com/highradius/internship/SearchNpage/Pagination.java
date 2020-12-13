@@ -55,14 +55,18 @@ public class Pagination extends HttpServlet{
 			while(resultset.next()) {
 				OrderDetails details = new OrderDetails();
 				details.setId(i++);
+				String val="";
+				val=resultset.getString("Approval_Status");
+				details.setApproval_status(val==null?" ":val);
 				
-				details.setApproval_status(resultset.getString("Approval_Status"));
-				details.setApproved_By(resultset.getString("Approved_By"));
+				val=resultset.getString("Approved_By");
+				details.setApproved_By(val==null?" ":val);
 				
 				details.setCompany_Id(Integer.parseInt(resultset.getString("Customer_ID")));
 				details.setCompany_Name(resultset.getString("Customer_Name"));
 				
-				details.setNotes(resultset.getString("Notes"));
+				val=resultset.getString("Notes");
+				details.setNotes(val==null?" ":val);
 				details.setOrder_amount(resultset.getString("Order_Amount"));
 				
 				details.setOrder_Date(resultset.getString("Order_Date"));

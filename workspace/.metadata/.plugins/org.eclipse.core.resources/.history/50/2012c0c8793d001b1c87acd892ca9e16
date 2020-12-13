@@ -61,7 +61,6 @@ public class SearchData extends HttpServlet{
 //				details.setOrder_Date(resultset.getString("Order_Date"));
 //				details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
 				
-				details.setId(i++);
 				String val="";
 				val=resultset.getString("Approval_Status");
 				details.setApproval_status(val==null?" ":val);

@@ -98,7 +98,7 @@ public class ADD  extends HttpServlet{
 			ResultSet resultset = DataClass.getDBResultSet(connection, isOrderPresent);
 			boolean path = resultset.next();
 			
-			if(!path && !(orderID==0||orderAmt==0||customerID==0||orderDate.equals("")||customerName.equals(""))) {
+			if(!path) {
 				System.out.println("order does not exsist so add it");
 
 			query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` )" + 
