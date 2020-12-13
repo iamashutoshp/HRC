@@ -3,6 +3,8 @@ package com.highradius.internship.Level1API;
 import javax.servlet.http.HttpServlet;
 
 import com.highradius.internship.*;
+import com.highradius.internship.data.OrderDetails;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,22 +57,18 @@ public class ADD  extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		 Add order query for database
 		
-
-//		( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` ) 
-
-		int orderID=0,customerID=0,orderAmt=0;
+		
+//		String data=request.getParameter("send");
+		
+		int orderID=0,
+		customerID=0,orderAmt=0;
 		
 		String orderDate="",customerName="",notes="";
 		
-		
-
-			
-
-		
-		
-	    
+//		System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
 		Connection connection = null;
 		String query="";
+		
 		try {
 			
 			orderID = Integer.parseInt(request.getParameter("orderID"));
@@ -85,9 +84,21 @@ public class ADD  extends HttpServlet{
 //			change it to correct time format
 //			orderDate = "2020-09-20 00:00:00";
 			
-
 			
+			System.out.println(orderID+"\n"+
+					orderDate+"\n"+
+					orderAmt+"\n"+
+					customerID+"\n"+
+					customerName+"\n"+
+					notes);
+			String isOrderPresent = "SELECT * FROM order_details WHERE Order_ID = "+orderID +" ;" ;
 			connection = DataClass.initializeDatabase();
+			ResultSet resultset = DataClass.getDBResultSet(connection, isOrderPresent);
+			boolean path = resultset.next();
+			System.out.println(path);
+			if(!path) {
+				System.out.println("order does not exsist so add it");
+
 			query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` )" + 
 					"VALUES ( "+orderID+", "+
 					" \'"+orderDate+"\' ,"+
@@ -96,10 +107,15 @@ public class ADD  extends HttpServlet{
 					notes+"\' ) ; " ;
 			
 			DataClass.runQuery(connection, query);
+			DataClass.closeResultSet(resultset);
 			DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
+			}
+			else {
+				System.out.println("sorry an order ID Already exists");
+			}
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -109,6 +125,88 @@ public class ADD  extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		
+		System.out.println("--------------------------");
+		
+		
+		Gson gson = new Gson();
+		 String data = gson.toJson("hgjhhjk");
+		 
+		 
+		 
+		 PrintWriter out = response.getWriter();
+		 
+		 
+		 response.setContentType("application/json");
+		 response.setCharacterEncoding("UTF-8");
+		 
+		 
+		 out.print(data);
+		 out.flush();
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		
+//		-------------------------------------------
+		
+//		------------------------------------------
+
+//		( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` ) 
+
+//		int orderID=0,customerID=0,orderAmt=0;
+//		
+//		String orderDate="",customerName="",notes="";
+//		
+//		Connection connection = null;
+//		String query="";
+//		try {
+//			
+//			orderID = Integer.parseInt(request.getParameter("orderID"));
+//			customerID = Integer.parseInt(request.getParameter("customerID"));
+//			orderAmt = Integer.parseInt(request.getParameter("orderAmt"));
+//			
+//			
+//			
+//			orderDate = request.getParameter("orderDate");
+//			customerName = request.getParameter("customerName");
+//			notes = request.getParameter("notes");
+//			
+////			change it to correct time format
+////			orderDate = "2020-09-20 00:00:00";
+//			
+//
+//			
+//			connection = DataClass.initializeDatabase();
+//			query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` )" + 
+//					"VALUES ( "+orderID+", "+
+//					" \'"+orderDate+"\' ,"+
+//					" \'"+customerName+"\' ,"+
+//					customerID+", "+orderAmt+", \'"+
+//					notes+"\' ) ; " ;
+//			
+//			DataClass.runQuery(connection, query);
+//			DataClass.closeDBConnection(connection);
+//			System.out.println(query);
+//		 
+//			System.out.println("succeessssssssss");
+//			
+//			
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		
 	}

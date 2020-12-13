@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -59,11 +60,81 @@ public class ADD  extends HttpServlet{
 		
 //		String data=request.getParameter("send");
 		
-		System.out.println(request);
-		System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
+		int orderID=0,
+		customerID=0,orderAmt=0;
+		
+		String orderDate="",customerName="",notes="";
+		
+//		System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
+		Connection connection = null;
+		String query="";
+		
+		Boolean success = false;
+		
+		try {
+			
+			orderID = Integer.parseInt(request.getParameter("orderID"));
+			customerID = Integer.parseInt(request.getParameter("customerID"));
+			orderAmt = Integer.parseInt(request.getParameter("orderAmt"));
+			
+			
+			
+			orderDate = request.getParameter("orderDate");
+			customerName = request.getParameter("customerName");
+			notes = request.getParameter("notes");
+			
+//			change it to correct time format
+//			orderDate = "2020-09-20 00:00:00";
+			
+			
+			System.out.println(orderID+"\n"+
+					orderDate+"\n"+
+					orderAmt+"\n"+
+					customerID+"\n"+
+					customerName+"\n"+
+					notes);
+			String isOrderPresent = "SELECT * FROM order_details WHERE Order_ID = "+orderID +" ;" ;
+			connection = DataClass.initializeDatabase();
+			ResultSet resultset = DataClass.getDBResultSet(connection, isOrderPresent);
+			boolean path = resultset.next();
+			
+			if(!path) {
+				System.out.println("order does not exsist so add it");
+
+			query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` )" + 
+					"VALUES ( "+orderID+", "+
+					" \'"+orderDate+"\' ,"+
+					" \'"+customerName+"\' ,"+
+					customerID+", "+orderAmt+", \'"+
+					notes+"\' ) ; " ;
+			
+			DataClass.runQuery(connection, query);
+			DataClass.closeResultSet(resultset);
+			DataClass.closeDBConnection(connection);
+			System.out.println(query);
+			success = true;
+			System.out.println("succeessssssssss");
+			}
+			else {
+				success=false;
+				System.out.println("sorry an order ID Already exists");
+			}
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		System.out.println("--------------------------");
+		
 		
 		Gson gson = new Gson();
-		 String data = gson.toJson("hgjhhjk");
+		 String data = gson.toJson(success);
 		 
 		 
 		 
@@ -76,6 +147,17 @@ public class ADD  extends HttpServlet{
 		 
 		 out.print(data);
 		 out.flush();
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 		
 //		-------------------------------------------
 		

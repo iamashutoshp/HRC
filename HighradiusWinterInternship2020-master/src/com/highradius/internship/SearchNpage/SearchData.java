@@ -42,7 +42,9 @@ public class SearchData extends HttpServlet{
 			query = "SELECT * FROM order_details WHERE Order_ID LIKE \'"+search+"%\' ;" ;
 			ResultSet resultset = DataClass.getDBResultSet(connection, query);
 			int i = 0;
-			if (resultset != null) {
+				if (!resultset.next()) {
+					System.out.println("query failed");
+				}else {
 			do {
 				OrderDetails details = new OrderDetails();
 				details.setId(i++);

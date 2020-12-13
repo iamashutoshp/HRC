@@ -57,7 +57,11 @@ public class logInUser extends HttpServlet {
 			
 			 connection = DataClass.initializeDatabase();
 			 resultset = DataClass.getDBResultSet(connection, query);
-			 String resString = resultset.getString("password");
+			 String resString = "";
+			 if(!resultset.next())
+				 System.out.println("failed query");
+			 else
+				 resString = resultset.getString("password");
 	if( passWord.equals(resString))
 		flag=resultset.getString("user_level");
 			 
