@@ -1,0 +1,74 @@
+
+Dec 14, 2020 12:12:50.82 NEW SESSION
+Dec 14, 2020 12:12:50.82 [10444:10488:1214/121250.726:ERROR:device_event_log_impl.cc(211)] [12:12:50.726] USB: usb_device_handle_win.cc:1020 Failed to read descriptor from node connection: A device attached to the system is not functioning. (0x1F)
+Dec 14, 2020 12:22:35.29 [1214/122235.294:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+Dec 14, 2020 13:48:43.21 [10444:10488:1214/134843.214:ERROR:CONSOLE(0)] "Error in event handler: Error: Node 229 was removed before its children.
+Dec 14, 2020 13:48:43.21     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20843:25
+Dec 14, 2020 13:48:43.21     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:48:43.21     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:48:43.22     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:48:43.39 [10444:10488:1214/134843.394:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot remove node 1252 because no matching node was found in the Store.
+Dec 14, 2020 13:48:43.39     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20830:25
+Dec 14, 2020 13:48:43.39     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:48:43.39     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:48:43.39     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:48:43.40 [10444:10488:1214/134843.395:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 1699 to parent 1270 because parent node was not found in the Store.
+Dec 14, 2020 13:48:43.40     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:48:43.40     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:48:43.40     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:48:43.40     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:48:43.40 [10444:10488:1214/134843.396:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 2112 to parent 1739 because parent node was not found in the Store.
+Dec 14, 2020 13:48:43.40     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:48:43.41     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:48:43.41     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:48:43.41     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:49:00.79 [10444:10488:1214/134900.793:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot remove node 2131 because no matching node was found in the Store.
+Dec 14, 2020 13:49:00.79     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20830:25
+Dec 14, 2020 13:49:00.79     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:49:00.79     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:49:00.79     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:49:00.79 [10444:10488:1214/134900.795:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 2142 to parent 2137 because parent node was not found in the Store.
+Dec 14, 2020 13:49:00.79     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:49:00.80     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:49:00.80     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:49:00.80     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:49:00.80 [10444:10488:1214/134900.797:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 2289 to parent 2182 because parent node was not found in the Store.
+Dec 14, 2020 13:49:00.80     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:49:00.80     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:49:00.80     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:49:00.80     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:50:04.08 [10444:10488:1214/135004.080:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot remove node 2111 because no matching node was found in the Store.
+Dec 14, 2020 13:50:04.08     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20830:25
+Dec 14, 2020 13:50:04.08     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:50:04.08     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:50:04.08     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:50:04.23 [10444:10488:1214/135004.230:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot remove node 2303 because no matching node was found in the Store.
+Dec 14, 2020 13:50:04.23     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20830:25
+Dec 14, 2020 13:50:04.23     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:50:04.23     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:50:04.23     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:50:04.23 [10444:10488:1214/135004.232:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 2750 to parent 2321 because parent node was not found in the Store.
+Dec 14, 2020 13:50:04.23     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:50:04.23     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:50:04.23     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:50:04.23     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:50:04.23 [10444:10488:1214/135004.233:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 3163 to parent 2790 because parent node was not found in the Store.
+Dec 14, 2020 13:50:04.23     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:50:04.23     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:50:04.24     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:50:04.24     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:53:30.66 [10444:10488:1214/135330.663:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot remove node 3182 because no matching node was found in the Store.
+Dec 14, 2020 13:53:30.66     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20830:25
+Dec 14, 2020 13:53:30.66     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:53:30.66     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:53:30.66     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:53:30.66 [10444:10488:1214/135330.665:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 3193 to parent 3188 because parent node was not found in the Store.
+Dec 14, 2020 13:53:30.66     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:53:30.66     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:53:30.67     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:53:30.67     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 13:53:30.67 [10444:10488:1214/135330.668:ERROR:CONSOLE(0)] "Error in event handler: Error: Cannot add child 3340 to parent 3233 because parent node was not found in the Store.
+Dec 14, 2020 13:53:30.67     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20773:25
+Dec 14, 2020 13:53:30.67     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 13:53:30.67     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 13:53:30.67     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)

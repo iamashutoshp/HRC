@@ -98,20 +98,41 @@ public class ADD  extends HttpServlet{
 			ResultSet resultset = DataClass.getDBResultSet(connection, isOrderPresent);
 			boolean path = resultset.next();
 			
+			String approvalStatus = "";
 			if(!path && !(orderID==0||orderAmt==0||customerID==0||orderDate.equals("")||customerName.equals(""))) {
 				System.out.println("order does not exsist so add it");
 
-			query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` )" + 
-					"VALUES ( "+orderID+", "+
-					" \'"+orderDate+"\' ,"+
-					" \'"+customerName+"\' ,"+
-					customerID+", "+orderAmt+", \'"+
-					notes+"\' ) ; " ;
+			if(orderAmt<=10000) {
+				approvalStatus = "Approved";
+				query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` , `Approval_Status` , `Approved_By` )" + 
+						"VALUES ( "+orderID+", "+
+						" \'"+orderDate+"\' ,"+
+						" \'"+customerName+"\' ,"+
+						customerID+", "+orderAmt+", \'"+
+						notes+"\' ,"+
+								" \'"+approvalStatus+"\' ,"+
+								" \'David Lee\') ;";
+				
+				System.out.println(query);
+			}
+			else {
+				approvalStatus = "Awaiting Approval";
+				
+				query="INSERT INTO `order_details` ( `Order_ID`, `Order_Date`, `Customer_Name`, `Customer_ID`, `Order_Amount`, `Notes` , `Approval_Status` )" + 
+						"VALUES ( "+orderID+", "+
+						" \'"+orderDate+"\' ,"+
+						" \'"+customerName+"\' ,"+
+						customerID+", "+orderAmt+", \'"+
+						notes+"\' ,"+
+								" \'"+approvalStatus+"\' ) ;";
+				
+			}
 			
+				System.out.println(query);
 			DataClass.runQuery(connection, query);
 			DataClass.closeResultSet(resultset);
 			DataClass.closeDBConnection(connection);
-			System.out.println(query);
+			
 			success = true;
 			System.out.println("succeessssssssss");
 			}

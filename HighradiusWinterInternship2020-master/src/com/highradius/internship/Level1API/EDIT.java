@@ -3,6 +3,7 @@ package com.highradius.internship.Level1API;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -14,80 +15,98 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.highradius.internship.DataClass;
 
-
-
 @WebServlet("/edit")
 public class EDIT extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	 public EDIT() throws ClassNotFoundException {
-	    	super();
-	    }
 
-		/**
-		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-		 */
-	    
+	public EDIT() throws ClassNotFoundException {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+
 //	 works fine   
-	 
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 //			update Edit order query in database
-			
-			
-			String id = "";
-			int amt = 0;
-			String notes="";
 
-			System.out.println("inside");
+		long orderID = 0, orderAmt = 0;
+
+		String approvedBy = "", notes = "";
+
+//					System.out.println(request.getParameter("orderID")+"\n"+request.getParameter("orderDate"));
+		Connection connection = null;
+		String query = "";
+
+		Boolean success = false;
+
+		try {
+
+			orderID = Long.parseLong(request.getParameter("order_Id"));
+			orderAmt = Long.parseLong(request.getParameter("order_Amount"));
+			notes = request.getParameter("notes");
+			approvedBy = request.getParameter("approved_By");
 			
-			Connection connection = null;
-			String query="";
-			try {
-				id = request.getParameter("id");
-				amt = Integer.parseInt(request.getParameter("at"));
-				notes=request.getParameter("nt");
-				
-				
-				query="UPDATE `order_details` \r\n" + 
-						"SET `Order_Amount` = "+amt+" , `Notes`"+"="+" \'"+notes+"\' WHERE `Order_ID` = "+id+" ;";
-				
-				System.out.println(query);
-				connection = DataClass.initializeDatabase();
-				DataClass.runQuery(connection, query);
-				
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.println("approved by in edit api : "+approvedBy);
+
+
+
+			System.out.println(orderID + "\n" + orderAmt + "\n"  +approvedBy+ "\n" + notes);
 			
+			if(orderAmt<=10000)
+				query = "UPDATE `order_details` "
+					+ "SET `Order_Amount` = \'"+orderAmt+"\', `Approved_By` = \'"+approvedBy+"\' , `Notes` = \'"+notes+"\' , `Approval_Status` = \'Approved\' "
+							+ "WHERE `Order_ID` = "+orderID+" ; ";
+			else
+				query = "UPDATE `order_details` "
+						+ "SET `Order_Amount` = \'"+orderAmt+"\', `Approved_By` = null , `Notes` = \'"+notes+"\', `Approval_Status` = \'Awaiting approval\' "
+						+ "WHERE `Order_ID` = "+orderID+" ; ";
 			
-			 
+			System.out.println(query);
 			
+			connection = DataClass.initializeDatabase();
+			DataClass.runQuery(connection, query);
+			success = true;
 			
-		
+			DataClass.closeDBConnection(connection);
 			
-			
-			
-			
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	//
-			
-			
-			
-			
-			
 
+		System.out.println("--------------------------");
 
-		/**
-		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-		 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			doGet(request, response);
-		}
-		
+		Gson gson = new Gson();
+		String data = gson.toJson(success);
+
+		PrintWriter out = response.getWriter();
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		out.print(data);
+		out.flush();
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doGet(request, response);
+	}
 
 }
