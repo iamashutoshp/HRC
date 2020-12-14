@@ -41,14 +41,14 @@ public class SearchData extends HttpServlet{
 		
 		try {
 			connection = DataClass.initializeDatabase();
-			System.out.println("in search ---------------------");
+			
 			switch (level) {
 			case "Level 2":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' AND Order_ID LIKE \'"+search+"%\' ;"  ;
+				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' AND Order_ID LIKE \'"+search+"\' ;"  ;
 				data=levelBasedData.Level2Page(connection, level, pageNo,query);
 			break;	
 			case "Level 3":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000'  AND Order_ID LIKE \'"+search+"%\' ;"  ;
+				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000'  AND Order_ID LIKE \'"+search+"\' ;"  ;
 				data=levelBasedData.Level3Page(connection, level, pageNo,query);
 			break;
 			default:
@@ -61,7 +61,7 @@ public class SearchData extends HttpServlet{
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
-			System.out.println("exit search ---------------------");
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

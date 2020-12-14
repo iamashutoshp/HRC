@@ -45,8 +45,6 @@ public class Pagination extends HttpServlet{
 		
 		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
 		String level = request.getParameter("LvL");
-		 
-//		System.out.println(level);
 		ArrayList<OrderDetails> data = null;
 		Connection connection = null;
 		String query="";
@@ -55,16 +53,13 @@ public class Pagination extends HttpServlet{
 			
 			switch (level) {
 			case "Level 2":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' ;"  ;
-				data=levelBasedData.Level2Page(connection, level, pageNo,query);
+				data=Level2Page(connection, level, pageNo);
 			break;	
 			case "Level 3":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000' ;"  ;
-				data=levelBasedData.Level3Page(connection, level, pageNo,query);
+				data=Level3Page(connection, level, pageNo);
 			break;
 			default:
-				query = "SELECT * FROM order_details ;"  ;
-				data=levelBasedData.Level1Page(connection, level, pageNo,query);
+				data=Level1Page(connection, level, pageNo);
 				break;
 			}
 			
@@ -119,7 +114,52 @@ public class Pagination extends HttpServlet{
 		 out.print(send);
 		 out.flush();
 	}
-
+//
+		
+		
+		private ArrayList<OrderDetails> Level1Page(Connection connection,String level,int pageNo) throws SQLException {
+			
+			String query = "SELECT * FROM order_details ;"  ;
+			ArrayList<OrderDetails> data = new ArrayList<>();
+			ResultSet resultset = DataClass.getDBResultSet(connection, query);
+			int i = 0;
+			while(resultset.next()) {
+				OrderDetails details = new OrderDetails();
+				details.setId(i++);
+				String val="";
+				val=resultset.getString("Approval_Status");
+				details.setApproval_status(val==null?" ":val);
+				
+				val=resultset.getString("Approved_By");
+				details.setApproved_By(val==null?" ":val);
+				
+				details.setCompany_Id(Integer.parseInt(resultset.getString("Customer_ID")));
+				details.setCompany_Name(resultset.getString("Customer_Name"));
+				
+				val=resultset.getString("Notes");
+				details.setNotes(val==null?" ":val);
+				details.setOrder_amount(resultset.getString("Order_Amount"));
+				
+				details.setOrder_Date(resultset.getString("Order_Date"));
+				details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
+				
+				data.add(details);
+				
+			}
+			DataClass.closeResultSet(resultset);
+			
+			return data;
+			
+		}
+		
+		private ArrayList<OrderDetails> Level2Page(Connection connection,String level,int pageNo) throws SQLException {
+			return null;
+		}
+		
+		private ArrayList<OrderDetails> Level3Page(Connection connection,String level,int pageNo) throws SQLException {
+			return null;
+		}
+		
 		
 		
 

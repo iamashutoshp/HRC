@@ -36,23 +36,21 @@ public class SearchData extends HttpServlet{
 		
 		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
 		int search = Integer.parseInt(request.getParameter("s"));
-		System.out.println("asdadada----"+search);
 		String level = request.getParameter("LvL");
-		
 		try {
 			connection = DataClass.initializeDatabase();
-			System.out.println("in search ---------------------");
+			
 			switch (level) {
 			case "Level 2":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' AND Order_ID LIKE \'"+search+"%\' ;"  ;
+				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' ;"  ;
 				data=levelBasedData.Level2Page(connection, level, pageNo,query);
 			break;	
 			case "Level 3":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000'  AND Order_ID LIKE \'"+search+"%\' ;"  ;
+				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000' ;"  ;
 				data=levelBasedData.Level3Page(connection, level, pageNo,query);
 			break;
 			default:
-				query = "SELECT * FROM order_details WHERE Order_ID LIKE \'"+search+"%\' ;" ;
+				query = "SELECT * FROM order_details ;"  ;
 				data=levelBasedData.Level1Page(connection, level, pageNo,query);
 				break;
 			}
@@ -61,7 +59,7 @@ public class SearchData extends HttpServlet{
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
-			System.out.println("exit search ---------------------");
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

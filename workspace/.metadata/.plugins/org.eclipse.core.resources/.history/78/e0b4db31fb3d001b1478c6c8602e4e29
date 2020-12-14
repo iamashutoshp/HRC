@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,53 +16,71 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.highradius.internship.DataClass;
-import com.highradius.internship.data.OrderDetails;
+import com.highradius.internship.logInUser;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
-@WebServlet("/search")
+import com.highradius.internship.data.*;
 
-public class SearchData extends HttpServlet{
+
+@WebServlet("/paging")
+
+
+
+// implement client side paging
+public class Pagination extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
-    public SearchData() throws ClassNotFoundException {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Pagination() throws ClassNotFoundException {
     	super();
     }
+
+	
     
-//    try to implement fast searching
+//    try to implement paging
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
 		ArrayList<OrderDetails> data = new ArrayList<>();
 		Connection connection = null;
 		String query="";
-		
-		
-		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
-		int search = Integer.parseInt(request.getParameter("s"));
-		System.out.println("asdadada----"+search);
-		String level = request.getParameter("LvL");
-		
 		try {
 			connection = DataClass.initializeDatabase();
-			System.out.println("in search ---------------------");
-			switch (level) {
-			case "Level 2":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' AND Order_ID LIKE \'"+search+"%\' ;"  ;
-				data=levelBasedData.Level2Page(connection, level, pageNo,query);
-			break;	
-			case "Level 3":
-				query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000'  AND Order_ID LIKE \'"+search+"%\' ;"  ;
-				data=levelBasedData.Level3Page(connection, level, pageNo,query);
-			break;
-			default:
-				query = "SELECT * FROM order_details WHERE Order_ID LIKE \'"+search+"%\' ;" ;
-				data=levelBasedData.Level1Page(connection, level, pageNo,query);
-				break;
+			query = "SELECT * FROM order_details ;"  ;
+			ResultSet resultset = DataClass.getDBResultSet(connection, query);
+			int i = 0;
+			while(resultset.next()) {
+				OrderDetails details = new OrderDetails();
+				details.setId(i++);
+				String val="";
+				val=resultset.getString("Approval_Status");
+				details.setApproval_status(val==null?" ":val);
+				
+				val=resultset.getString("Approved_By");
+				details.setApproved_By(val==null?" ":val);
+				
+				details.setCompany_Id(Integer.parseInt(resultset.getString("Customer_ID")));
+				details.setCompany_Name(resultset.getString("Customer_Name"));
+				
+				val=resultset.getString("Notes");
+				details.setNotes(val==null?" ":val);
+				details.setOrder_amount(resultset.getString("Order_Amount"));
+				
+				details.setOrder_Date(resultset.getString("Order_Date"));
+				details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
+				
+				data.add(details);
+				
 			}
-			
-			DataClass.closeDBConnection(connection);
+			DataClass.closeResultSet(resultset);
+			 DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
 			System.out.println("succeessssssssss");
-			System.out.println("exit search ---------------------");
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -77,23 +96,34 @@ public class SearchData extends HttpServlet{
 			sz=data.size()/10;
 		else
 			sz=data.size()/10 + 1;
-//		got row data of requested page
+		
+		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
+		
+		
+		
+		
 		ArrayList<OrderDetails> rowData = new ArrayList<>();
+		
+		
 		for(int k=0;k<10 && (k+10*pageNo)<data.size();k++)
 			rowData.add(data.get(k+10*pageNo));
 		
-		Data res ;
-		System.out.println(data);
-		if(data.isEmpty()||pageNo+1>sz)
-			res = new Data(rowData, 0, 0);
-		else
-			res = new Data(rowData, pageNo+1, sz);
+		Data res = new Data(rowData, pageNo+1, sz);
+		
+		
 		
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
+		 
+		 
+		 
 		 PrintWriter out = response.getWriter();
+		 
+		 
 		 response.setContentType("application/json");
 		 response.setCharacterEncoding("UTF-8");
+		 
+		 
 		 out.print(send);
 		 out.flush();
 	}
@@ -115,4 +145,14 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 	
 
+}
+
+class Data{
+	ArrayList<OrderDetails> data;
+	int pageNo, totalSize;
+	Data(ArrayList<OrderDetails> d, int pno, int size){
+		data=d;
+		pageNo = pno;
+		totalSize =size;
+	}
 }
