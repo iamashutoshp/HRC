@@ -72,3 +72,9 @@ Dec 14, 2020 13:53:30.67     at chrome-extension://fmkadmapgofadopljbjfkapdkoien
 Dec 14, 2020 13:53:30.67     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
 Dec 14, 2020 13:53:30.67     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
 Dec 14, 2020 13:53:30.67     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)
+Dec 14, 2020 19:17:06.57 [10444:10488:1214/191706.211:ERROR:device_event_log_impl.cc(211)] [19:17:06.211] USB: usb_service_win.cc:258 Failed to get device driver name: Element not found. (0x490)
+Dec 14, 2020 23:16:32.12 [10444:10488:1214/231632.120:ERROR:CONSOLE(0)] "Error in event handler: Error: Node 3 was removed before its children.
+Dec 14, 2020 23:16:32.21     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:20843:25
+Dec 14, 2020 23:16:32.21     at bridge_Bridge.emit (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:18990:22)
+Dec 14, 2020 23:16:32.21     at chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:19123:12
+Dec 14, 2020 23:16:32.21     at listener (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/main.js:36391:39)", source: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/main.html (0)

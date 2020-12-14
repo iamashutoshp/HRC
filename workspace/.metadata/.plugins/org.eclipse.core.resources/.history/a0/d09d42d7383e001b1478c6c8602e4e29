@@ -1,0 +1,81 @@
+package com.highradius.internship.Level2_3API;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.highradius.internship.DataClass;
+import com.highradius.internship.SearchNpage.levelBasedData;
+
+
+
+@WebServlet("/approve")
+public class Approve extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+     public Approve() {
+    	super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		String level = request.getParameter("Lvl");
+		String userName = level.equals("Level 2") ? "Laura Smith " : "Matthew Vance";
+		
+		System.out.println("in approve : \n" +orderId+"\n"+level+"\n"+userName);
+		Connection connection = null;
+		String query="";
+		try {
+			connection = DataClass.initializeDatabase();
+			query="";
+			
+			
+//			DataClass.runQuery(connection, query);
+			
+//			"UPDATE `order_details` "
+//			+ "SET `Order_Amount` = \'"+orderAmt+"\', `Approved_By` = \'"+approvedBy+"\' , `Notes` = \'"+notes+"\' , `Approval_Status` = \'Approved\' "
+//					+ "WHERE `Order_ID` = "+orderID+" ; ";
+			
+			
+			DataClass.closeDBConnection(connection);
+			System.out.println(query);
+		 
+			System.out.println("success in approval");
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
