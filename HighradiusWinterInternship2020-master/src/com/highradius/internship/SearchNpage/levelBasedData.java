@@ -1,19 +1,19 @@
 package com.highradius.internship.SearchNpage;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.highradius.internship.DataClass;
 import com.highradius.internship.data.OrderDetails;
 
 public class levelBasedData {
-	 static ArrayList<OrderDetails> Level1Page(Connection connection,String level,int pageNo,String query) throws SQLException {
+
+	
+	static ArrayList<OrderDetails> Level1Page(Connection connection,String level,int pageNo,String query) throws SQLException {
 		
-//		String query = "SELECT * FROM order_details ;"  ;
+// fetching requirements for Level 1 users requested data
 		ArrayList<OrderDetails> data = new ArrayList<>();
 		ResultSet resultset = DataClass.getDBResultSet(connection, query);
 		int i = 0;
@@ -56,7 +56,8 @@ public class levelBasedData {
 	}
 	
 	 static ArrayList<OrderDetails> Level2Page(Connection connection,String level,int pageNo,String query) throws SQLException {
-//		 String query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' ;"  ;
+
+// fetching requirements for Level 2 users requested data
 			ArrayList<OrderDetails> data = new ArrayList<>();
 			ResultSet resultset = DataClass.getDBResultSet(connection, query);
 			int i = 0;
@@ -77,7 +78,13 @@ public class levelBasedData {
 				details.setNotes(val==null?" ":val);
 				details.setOrder_amount(resultset.getString("Order_Amount"));
 				
-				details.setOrder_Date(resultset.getString("Order_Date"));
+				
+				String dateData[] = (resultset.getString("Order_Date").trim()).split(" ");
+				
+				String formatDate[] = (dateData[0]).split("-");
+				String date = formatDate[2]+"/"+formatDate[1]+"/"+formatDate[0];
+				details.setOrder_Date(date);
+				
 				details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
 				
 				data.add(details);
@@ -90,7 +97,8 @@ public class levelBasedData {
 	}
 	
 	 static ArrayList<OrderDetails> Level3Page(Connection connection,String level,int pageNo,String query) throws SQLException {
-//		 String query = "SELECT * FROM `order_details` WHERE `Order_Amount` > '50000' ;"  ;
+
+// fetching requirements for Level 3 users requested data
 			ArrayList<OrderDetails> data = new ArrayList<>();
 			ResultSet resultset = DataClass.getDBResultSet(connection, query);
 			int i = 0;
@@ -111,7 +119,12 @@ public class levelBasedData {
 				details.setNotes(val==null?" ":val);
 				details.setOrder_amount(resultset.getString("Order_Amount"));
 				
-				details.setOrder_Date(resultset.getString("Order_Date"));
+				String dateData[] = (resultset.getString("Order_Date").trim()).split(" ");
+				
+				String formatDate[] = (dateData[0]).split("-");
+				String date = formatDate[2]+"/"+formatDate[1]+"/"+formatDate[0];
+				details.setOrder_Date(date);
+				
 				details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
 				
 				data.add(details);

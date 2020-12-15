@@ -3,7 +3,6 @@ package com.highradius.internship.SearchNpage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,10 +32,11 @@ public class SearchData extends HttpServlet{
 		Connection connection = null;
 		String query="";
 		
-		
+	
+//		storing requested page no. as 0-based indexing 
 		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
 		int search = Integer.parseInt(request.getParameter("s"));
-		System.out.println("asdadada----"+search);
+	
 		String level = request.getParameter("LvL");
 		
 		try {
@@ -60,8 +60,6 @@ public class SearchData extends HttpServlet{
 			DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
-			System.out.println("succeessssssssss");
-			System.out.println("exit search ---------------------");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -71,24 +69,30 @@ public class SearchData extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		
+//		getting total pages available for the user in size => sz
 		int sz=0;
 		if(data.size()%10 == 0)
 			sz=data.size()/10;
 		else
 			sz=data.size()/10 + 1;
-//		got row data of requested page
+		
+		
+		
+// 		getting required page no.'s data in rowData List
 		ArrayList<OrderDetails> rowData = new ArrayList<>();
 		for(int k=0;k<10 && (k+10*pageNo)<data.size();k++)
 			rowData.add(data.get(k+10*pageNo));
 		
+// storing requested pageNo's data and current page no. and total pages available for the user in Data res
 		Data res ;
 		System.out.println(data);
 		if(data.isEmpty()||pageNo+1>sz)
 			res = new Data(rowData, 0, 0);
 		else
 			res = new Data(rowData, pageNo+1, sz);
+
 		
+// sending the requested data
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
 		 PrintWriter out = response.getWriter();

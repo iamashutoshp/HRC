@@ -17,8 +17,10 @@
 <fullyQualifiedTypeName name="com.highradius.internship.SearchNpage.Data"/>
 <fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="com.highradius.internship.SearchNpage.levelBasedData"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.highradius.internship.DataClass"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="com.highradius.internship.SearchNpage.levelBasedData"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

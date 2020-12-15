@@ -1,7 +1,6 @@
 package com.highradius.internship.Level2_3API;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.highradius.internship.DataClass;
 
 
@@ -52,23 +50,19 @@ public class Reject extends HttpServlet {
 			DataClass.closeDBConnection(connection);
 			System.out.println(query);
 		 
-			System.out.println("success in rejection");
+			System.out.println("successfully rejected");
 			
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

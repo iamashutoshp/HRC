@@ -1,0 +1,99 @@
+package com.highradius.internship.Level1API;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.highradius.internship.DataClass;
+
+@WebServlet("/edit")
+public class EDIT extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public EDIT() throws ClassNotFoundException {
+		super();
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		long orderID = 0, orderAmt = 0;
+
+		String approvedBy = "", notes = "";
+
+		Connection connection = null;
+		String query = "";
+
+		Boolean success = false;
+
+		try {
+
+			orderID = Long.parseLong(request.getParameter("order_Id"));
+			orderAmt = Long.parseLong(request.getParameter("order_Amount"));
+			notes = request.getParameter("notes");
+			approvedBy = request.getParameter("approved_By");
+			
+			System.out.println("approved by in edit api : "+approvedBy);
+
+
+
+			System.out.println(orderID + "\n" + orderAmt + "\n"  +approvedBy+ "\n" + notes);
+			
+			if(orderAmt<=10000)
+				query = "UPDATE `order_details` "
+					+ "SET `Order_Amount` = \'"+orderAmt+"\', `Approved_By` = \'"+approvedBy+"\' , `Notes` = \'"+notes+"\' , `Approval_Status` = \'Approved\' "
+							+ "WHERE `Order_ID` = "+orderID+" ; ";
+			else
+				query = "UPDATE `order_details` "
+						+ "SET `Order_Amount` = \'"+orderAmt+"\', `Approved_By` = null , `Notes` = \'"+notes+"\', `Approval_Status` = \'Awaiting approval\' "
+						+ "WHERE `Order_ID` = "+orderID+" ; ";
+			
+			System.out.println(query);
+			
+			connection = DataClass.initializeDatabase();
+			DataClass.runQuery(connection, query);
+			success = true;
+			
+			DataClass.closeDBConnection(connection);
+			
+
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		Gson gson = new Gson();
+		String data = gson.toJson(success);
+
+		PrintWriter out = response.getWriter();
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		out.print(data);
+		out.flush();
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doGet(request, response);
+	}
+
+}

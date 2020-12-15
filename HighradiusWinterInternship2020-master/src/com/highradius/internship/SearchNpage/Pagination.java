@@ -3,10 +3,8 @@ package com.highradius.internship.SearchNpage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.highradius.internship.DataClass;
-import com.highradius.internship.logInUser;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import com.highradius.internship.data.*;
 
@@ -26,33 +22,29 @@ import com.highradius.internship.data.*;
 
 
 
-// implement client side paging
+// implementing server side paging
 public class Pagination extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Pagination() throws ClassNotFoundException {
     	super();
     }
 
 	
     
-//    try to implement paging
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int pageNo = Integer.parseInt(request.getParameter("pNo"))-1;
 		String level = request.getParameter("LvL");
 		 
-//		System.out.println(level);
+
 		ArrayList<OrderDetails> data = null;
 		Connection connection = null;
 		String query="";
 		try {
 			connection = DataClass.initializeDatabase();
 			
+//			getting data for pages based on the level of user
 			switch (level) {
 			case "Level 2":
 				query = "SELECT * FROM `order_details` WHERE `Order_Amount` <= '50000' AND `Order_Amount` > '10000' ;"  ;
@@ -70,9 +62,6 @@ public class Pagination extends HttpServlet{
 			
 			DataClass.closeDBConnection(connection);
 			System.out.println(query);
-		 
-			System.out.println("succeessssssssss");
-			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -83,38 +72,31 @@ public class Pagination extends HttpServlet{
 		}
 		
 		
+//		getting total pages available for the user in size => sz 
 		int sz=0;
 		if(data.size()%10 == 0)
 			sz=data.size()/10;
 		else
-			sz=data.size()/10 + 1;
+			sz=data.size()/10 + 1;		
 		
 		
-		
-		
-		
+// getting required page no.'s data in rowData List
 		
 		ArrayList<OrderDetails> rowData = new ArrayList<>();
-		
-		
 		for(int k=0;k<10 && (k+10*pageNo)<data.size();k++)
 			rowData.add(data.get(k+10*pageNo));
 		
+// storing requested pageNo's data and current page no. and total pages available for the user in Data res 
 		Data res = new Data(rowData, pageNo+1, sz);
 		
 		
-		
+//		sending the Data res to front-end
 		Gson gson = new Gson();
 		String send = gson.toJson(res);
-		 
-		 
-		 
-		 PrintWriter out = response.getWriter();
-		 
+		PrintWriter out = response.getWriter();
 		 
 		 response.setContentType("application/json");
 		 response.setCharacterEncoding("UTF-8");
-		 
 		 
 		 out.print(send);
 		 out.flush();
@@ -136,6 +118,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 
 }
 
+// Data class to store the data to be sent 
 class Data{
 	ArrayList<OrderDetails> data;
 	int pageNo, totalSize;

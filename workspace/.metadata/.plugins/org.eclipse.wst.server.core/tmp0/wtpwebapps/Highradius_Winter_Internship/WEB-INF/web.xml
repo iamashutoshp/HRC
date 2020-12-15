@@ -30,13 +30,5 @@
     <url-pattern>/dummy.do</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>logInUser</servlet-name>
-    <servlet-class>com.highradius.internship.logInUser</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>logInUser</servlet-name>
-    <url-pattern>/dummy</url-pattern>
-  </servlet-mapping>
   
 </web-app>
