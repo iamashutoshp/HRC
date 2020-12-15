@@ -39,7 +39,7 @@ public class levelBasedData {
 			String dateData[] = (resultset.getString("Order_Date").trim()).split(" ");
 			
 			String formatDate[] = (dateData[0]).split("-");
-			String date = formatDate[2]+"/"+formatDate[1]+"/"+formatDate[0];
+			String date = formatDate[1]+"/"+formatDate[2]+"/"+formatDate[0];
 			details.setOrder_Date(date);
 			
 		    

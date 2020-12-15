@@ -1,10 +1,8 @@
 package com.highradius.internship.SearchNpage;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.highradius.internship.DataClass;
@@ -34,16 +32,7 @@ public class levelBasedData {
 			details.setNotes(val==null?" ":val);
 			details.setOrder_amount(resultset.getString("Order_Amount"));
 			
-			
-		    
-			String dateData[] = (resultset.getString("Order_Date").trim()).split(" ");
-			
-			String formatDate[] = (dateData[0]).split("-");
-			String date = formatDate[2]+"/"+formatDate[1]+"/"+formatDate[0];
-			details.setOrder_Date(date);
-			
-		    
-		    
+			details.setOrder_Date(resultset.getString("Order_Date"));
 			details.setOrder_Id(Integer.parseInt(resultset.getString("Order_ID")));
 			
 			data.add(details);
