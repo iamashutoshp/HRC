@@ -64,8 +64,10 @@ public class Pagination extends HttpServlet{
 			System.out.println(query);
 			
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
